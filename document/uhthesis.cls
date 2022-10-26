@@ -10,7 +10,7 @@
 \ProcessOptions
 \relax
 \LoadClass{book}
-\RequirePackage{mathptmx}
+%\RequirePackage{mathptmx}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{lmodern}
 
