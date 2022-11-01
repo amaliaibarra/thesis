@@ -22,9 +22,9 @@
 \RequirePackage{footmisc}
 \RequirePackage{csquotes}
 \RequirePackage[
-	style=apa,
-	citestyle=authoryear,
-  hyperref=true,
+	style=ieee,
+	citestyle=numeric,
+  	hyperref=true,
 	backref=true
 	]{biblatex}
 \RequirePackage[linktocpage,breaklinks,colorlinks,%

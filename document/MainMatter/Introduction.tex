@@ -1,19 +1,29 @@
 \chapter*{Introducción}\label{chapter:introduction}
 \addcontentsline{toc}{chapter}{Introducción}
 
-Hyperledger Fabric es una plataforma de tecnología de libro mayor distribuido (DLT) de código abierto, diseñada para su uso en contextos empresariales. Su arquitectura altamente modular y configurable permite la innovación, la versatilidad y la optimización para una amplia gama de casos de uso de la industria, incluidos la banca, las finanzas, los seguros, la atención médica, los recursos humanos, la cadena de suministro e incluso la entrega de música digital.
+Hyperledger Fabric es una plataforma de tecnología de libro mayor distribuido (DLT) de código abierto, diseñada para su uso en contextos empresariales [\cite{hlf-doc}]. Su arquitectura altamente modular y configurable permite la innovación, la versatilidad y la optimización para una amplia gama de casos de uso de la industria, incluidos la banca, las finanzas, los seguros, la atención médica, los recursos humanos, la cadena de suministro e incluso la entrega de música digital.
 
-Entre las capacidades que distinguen a Hyperledger Fabric de otras blockchains destaca ser la primera plataforma DLT que admite contratos inteligentes creados en lenguajes de programación de propósito general como Java, Go y Node.js, en lugar de lenguajes específicos de dominio restringidos (DSL). Esto significa que la mayoría de las empresas ya tienen el conjunto de habilidades necesario para desarrollar contratos inteligentes y no se necesita capacitación adicional para aprender un nuevo idioma o DSL por tanto, es una gran ventaja. Lo novedoso es que la implementación de contratos inteligentes no está limitada a los lenguajes anteriores, es posible expandir la lista a cualquier lenguaje de programación. 
+Entre las capacidades que distinguen a Hyperledger Fabric de otras blockchains destaca ser la primera plataforma DLT que admite contratos inteligentes creados en lenguajes de programación de propósito general como Java, Go y Node.js.
+Esto significa que la mayoría de las empresas no necesitan capacitación adicional para aprender un nuevo idioma o DSL para poder trabajar con Hyperledger Fabric, por tanto, es una ventaja.
 
-A partir de esta posibilidad el Instituto de Criptografía de la Universidad de la Habana con el propósito de facilitar el entrenamiento docente en la concepción de contratos traza como objetivo general integrar la lógica de los contratos inteligentes programados en $C\sharp$ dentro de la arquitectura de una blockchain Hyperledger Fabric.
+Para lograr esta capacidad, Hyperledger Fabric implementa una arquitectura para las transacciones llamada \textit{execute-order-validate} [\cite{hlf-doc}], que permite eliminar el no determinismo en los contratos inteligentes independientemente del lenguaje en el que se programen. Como consecuencia, la lista de lenguajes mencionada anteriormente puede ser extensible a cualquier otro lenguaje de programación. 
 
-Por qué $C \sharp$? Bueno, además de contar con una amplia comunidad de desarrolladores alrededor del mundo $C \sharp$ es el lenguaje con el que los estudiantes de la carrera de Ciencias de la Computación aprenden a programar. Poder crear contratos inteligentes en un lenguaje conocido es una ventaja que incentiva el acercamiento al mundo del Blockchain en los primeros años de la carrera.
 
-El problema a resolver consiste entonces en poder programar contratos inteligentes en $C\sharp$ que interactúen con una Blockchain en Hyperledger Fabric.
+%Los contratos inteligentes que se ejecutan en una Blockchain deben ser deterministas; de lo contrario, es posible que nunca se llegue a un consenso. Para abordar el problema del no determinismo, muchas plataformas requieren que los contratos inteligentes se escriban en un lenguaje específico de dominio restringido (como Solidity) para que se puedan eliminar las operaciones no deterministas.
+
+%En Fabric, una política de respaldo específica de la aplicación especifica qué nodos pares, o cuántos de ellos, deben garantizar la ejecución correcta de un contrato inteligente determinado. Por lo tanto, cada transacción solo necesita ser ejecutada (aprobada) por el subconjunto de los nodos pares necesarios para satisfacer la política de aprobación de la transacción. Esto permite una ejecución paralela que aumenta el rendimiento general y la escala del sistema. Esta primera fase también elimina cualquier no determinismo, ya que los resultados inconsistentes se pueden filtrar antes de realizar el pedido.
+
+%Debido a que eliminamos el no determinismo, Fabric es la primera tecnología de cadena de bloques que permite el uso de lenguajes de programación estándar.
+
+A partir de esta posibilidad el Instituto de Criptografía de la Universidad de la Habana, ante la necesidad existente de poder utilizar lenguajes de propósito general para el desarrollo de los contratos con Hyperledger Fabric, traza como    \textbf{objetivo general} integrar la lógica de los contratos inteligentes programados en $C\sharp$ dentro de la arquitectura de una blockchain Hyperledger Fabric.
+
+%El lenguaje $C \sharp$ es un requerimiento del Instituto? Bueno, además de contar con una amplia comunidad de desarrolladores alrededor del mundo $C \sharp$ es el lenguaje con el que los estudiantes de la carrera de Ciencias de la Computación aprenden a programar. Poder crear contratos inteligentes en un lenguaje conocido es una ventaja que incentiva el acercamiento al mundo del Blockchain en los primeros años de la carrera.
+
+El \textbf{problema a resolver} consiste entonces en crear las condiciones técnicas y documentación con el fin de garantizar la programación de contratos inteligentes para Hyperledger Fabric  escritos en $C\sharp$.
 
 Se propone construir una API fabric-contract-api-csharp,  que proporcione la interfaz del contrato, un punto de entrada de alto nivel para escribir la lógica empresarial.
 
-Para el cumplimiento de este objetivo general se llevarán a cabo las siguientes tareas:
+Para el cumplimiento de este objetivo general se llevarán a cabo las \textbf{siguientes tareas}:
 
 \begin{enumerate}
 \item Estudio de las APIs existentes para los lenguajes actualmente soportados.
