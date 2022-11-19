@@ -4,9 +4,9 @@
 Hyperledger Fabric es una plataforma de tecnología de libro mayor distribuido (DLT) de código abierto, diseñada para su uso en contextos empresariales [\cite{hlf-doc}]. Su arquitectura altamente modular y configurable permite la innovación, la versatilidad y la optimización para una amplia gama de casos de uso de la industria, incluidos la banca, las finanzas, los seguros, la atención médica, los recursos humanos, la cadena de suministro e incluso la entrega de música digital.
 
 Entre las capacidades que distinguen a Hyperledger Fabric de otras blockchains destaca ser la primera plataforma DLT que admite contratos inteligentes creados en lenguajes de programación de propósito general como Java, Go y Node.js.
-Esto significa que la mayoría de las empresas no necesitan capacitación adicional para aprender un nuevo idioma o DSL para poder trabajar con Hyperledger Fabric, por tanto, es una ventaja.
+Esto significa que la mayoría de las empresas no necesitan capacitación adicional para aprender un nuevo idioma o Lenguaje de Dominio Específico (DSL, por sus siglas en inglés) si deciden trabajar con Hyperledger Fabric, por tanto, representa una ventaja.
 
-Para lograr esta capacidad, Hyperledger Fabric implementa una arquitectura para las transacciones llamada \textit{execute-order-validate} [\cite{hlf-paper}], que permite eliminar el no determinismo en los contratos inteligentes independientemente del lenguaje en el que se programen. Como consecuencia, la lista de lenguajes mencionada anteriormente puede ser extensible a cualquier otro lenguaje de programación. 
+Para lograr esta capacidad, Hyperledger Fabric implementa una arquitectura de ejecución de transacciones llamada \textit{execute-order-validate} [\cite{hlf-paper}], que permite eliminar el no determinismo en los contratos inteligentes independientemente del lenguaje en el que se programen. Como consecuencia, la lista de lenguajes mencionada anteriormente puede ser extensible a cualquier otro lenguaje de programación. 
 
 
 %Los contratos inteligentes que se ejecutan en una Blockchain deben ser deterministas; de lo contrario, es posible que nunca se llegue a un consenso. Para abordar el problema del no determinismo, muchas plataformas requieren que los contratos inteligentes se escriban en un lenguaje específico de dominio restringido (como Solidity) para que se puedan eliminar las operaciones no deterministas.
@@ -15,11 +15,11 @@ Para lograr esta capacidad, Hyperledger Fabric implementa una arquitectura para 
 
 %Debido a que eliminamos el no determinismo, Fabric es la primera tecnología de cadena de bloques que permite el uso de lenguajes de programación estándar.
 
-A partir de esta posibilidad el Instituto de Criptografía de la Universidad de la Habana, ante la necesidad existente de poder utilizar lenguajes de propósito general para el desarrollo de los contratos con Hyperledger Fabric, traza como    \textbf{objetivo general} integrar la lógica de los contratos inteligentes programados en $C\sharp$ dentro de la arquitectura de una blockchain Hyperledger Fabric.
+A partir de esta posibilidad, el Instituto de Criptografía de la Universidad de la Habana, ante la necesidad existente de utilizar lenguajes de propósito general para el desarrollo de contratos con Hyperledger Fabric, traza como    \textbf{objetivo general:} integrar la lógica de los contratos inteligentes programados en $C\sharp$ dentro de la arquitectura de una blockchain Hyperledger Fabric.
 
 %El lenguaje $C \sharp$ es un requerimiento del Instituto? Bueno, además de contar con una amplia comunidad de desarrolladores alrededor del mundo $C \sharp$ es el lenguaje con el que los estudiantes de la carrera de Ciencias de la Computación aprenden a programar. Poder crear contratos inteligentes en un lenguaje conocido es una ventaja que incentiva el acercamiento al mundo del Blockchain en los primeros años de la carrera.
 
-El \textbf{problema a resolver} consiste entonces en crear las condiciones técnicas y documentación con el fin de garantizar la programación de contratos inteligentes para Hyperledger Fabric  escritos en $C\sharp$.
+El \textbf{problema a resolver} consiste entonces en crear las condiciones técnicas y documentación con el fin de garantizar la programación de contratos inteligentes escritos en $C\sharp$ para Hyperledger Fabric  .
 
 Se propone construir una API fabric-contract-api-csharp,  que proporcione la interfaz del contrato, un punto de entrada de alto nivel para escribir la lógica empresarial.
 
