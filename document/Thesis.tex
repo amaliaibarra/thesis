@@ -16,7 +16,7 @@
 \usepackage{graphicx}
 \floatstyle{plaintop}
 \restylefloat{table}
-
+\sloppy
 %\addbibresource{Bibliography.bib}
 % \setlength{\parskip}{\baselineskip}%
 \renewcommand{\tablename}{Tabla}
@@ -32,12 +32,13 @@
 \lstdefinestyle{mystyle}{
 	language=[Sharp]C,
     backgroundcolor=\color{white},   
-    commentstyle=\color{codegreen},
+%    commentstyle=\color{codegreen},
     keywordstyle=\color{blue},
+    morekeywords={partial, var, value, get, set, T},
     numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,         
+    stringstyle=\color{redstrings},
+%    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=true,         
     breaklines=true,                 
     captionpos=b,                    
     keepspaces=true,                 
@@ -46,13 +47,18 @@
     showspaces=false,                
     showstringspaces=false,
     showtabs=false,                  
-    tabsize=4
+    tabsize=4,
+%    
+frame=lines,
+escapeinside={(*@}{@*)},
+commentstyle=\color{greencomments},
+basicstyle=\ttfamily\small,
 }
 
 \lstset{style=mystyle}
 \usepackage{spanish}
 
-\title{Módulo fabric-contract-api para implementar contratos inteligentes empleando $C\sharp$.}
+\title{Módulo fabric-chaincode-api para implementar contratos inteligentes empleando $C\sharp$.}
 \author{\\\vspace{0.25cm}Amalia Nilda Ibarra Rodríguez}
 \advisor{\\\vspace{0.25cm}Ing. Daniel Frías \\\vspace{0.25cm}Ing. Camilo  Mena\\\vspace{0.2cm}Dr. Miguel Katrib Mora}
 \degree{Licenciado en Ciencia de la Computación}

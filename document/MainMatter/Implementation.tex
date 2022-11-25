@@ -1,1 +1,56 @@
-\chapter{Detalles de Implementación y Experimentos}\label{chapter:implementation}
+\chapter{Experimentación y Resultados}\label{chapter:implementation}
+En este capítulo se exponen los resultados, las ventajas, desventajas y comparaciones de usar la biblioteca \texttt{fabric-chaincode-csharp} con respecto a las implementadas en otros lenguajes.
+
+\section{$ C\sharp $ en Hyperledger Fabric}
+La biblioteca propuesta permite la creación de contratos inteligentes en  $ C\sharp $. Como resultado, es posible aprovechar características propias del lenguaje para crear aplicaciones sólidas y duraderas sobre Hyperledger Fabric.
+
+$ C\sharp $ es un lenguaje orientado a objetos. Este paradigma de la programación fomenta la productividad en el desarrollo de \textit{software} mediante las propiedades: encapsulación, herencia y polimorfismo. La primera consiste en la posibilidad de una clase o estructura de especificar qué tan accesible es cada uno de sus miembros. La herencia es útil cuando se necesita agregar funcionalidad a un tipo existente. El polimorfismo permite que en tiempo de ejecución, los objetos de una clase derivada pueden tratarse como objetos de una clase base en lugares como parámetros de método.
+
+Otras facilidades que provee el lenguaje $ C\sharp $ incluyen:
+
+\begin{enumerate}
+\item Las expresiones \textit{lambda} admiten técnicas de programación funcional.
+
+\item La recolección de basura recupera automáticamente la memoria ocupada por objetos no utilizados.
+
+\item  Admite tipos por referencia y por valor definidos por el usuario. 
+
+\item  Los tipos anulables protegen contra variables que no hacen referencia a objetos asignados.
+
+\item El manejo de excepciones proporciona un enfoque estructurado y extensible para la detección y recuperación de errores.
+
+\item El soporte de lenguaje para operaciones asíncronas proporciona sintaxis para construir sistemas distribuidos.
+
+\end{enumerate}
+
+Si se compara con \texttt{fabric-chaincode-go} la biblioteca propuesta tiene como ventaja la capacidad de crear procesos concurrentes dentro de una misma transacción. Esto gracias a la implementación de la clase \texttt{MsgQueueHandler}, la cual maneja la interacción con el peer a través de un diccionario que asocia a cada transacción una cola de mensajes. De esta forma, pueden existir varios hilos dentro del contexto de una misma transacción pues, el intercambio con el \textit{peer} se realiza de forma síncrona en el orden en que se añaden los mensajes en la cola.
+
+Aparte de las ventajas mencionadas, también existen limitaciones.
+La \texttt{fabric-chaincode-api} propuesta no implementa todas las funcionalidades que existen en el resto de bibliotecas. Por ejemplo, en Javascript/Typescript la \texttt{ChaincodeStubInterface} expone varios métodos que posibilita recibir una secuencia de datos del peer. Esta capacidad es útil pues permite, entre otras cosas, obtener un rango de llaves que cumplen con un determinado criterio o la recuperación de los cambios históricos realizados en el valor asociado a una llave.
+
+\section{Experimentación}
+
+Para probar el correcto funcionamiento de la herramienta propuesta, se crearon numerosos contratos inteligentes. El código \ref{code:csharpcontract} expone un ejemplo de estos.
+
+\colorbox{lightgray}{PENDIENTE: Insertar código}
+
+\section{Recomendaciones}
+Las áreas en las que orientar el futuro de fabric-chaincode-csharp son:
+    
+\begin{enumerate}
+\item Extender las funcionalidades expuestas en el \texttt{ChaincodeStub}.
+\item Diseño e implementación de la biblioteca de alto nivel\\ \texttt{fabric-contract-csharp}.
+\end{enumerate}
+
+
+%La implementación de esta capacidad se basa en iteradores. Se definen tres tipos diferentes:
+%
+%CommonIteratorInterface: define las operaciones comunes de todos los tipos de iteradores.
+%
+%StateQueryIteratorInterface: especializa la interfaz del iterador base para iterar sobre una colección de claves en el ledger.
+%
+%HistoryQueryIteratorInterface: esta interfaz especializa la interfaz del iterador base para iterar sobre el historial de cambios de una llave.
+
+
+
+
