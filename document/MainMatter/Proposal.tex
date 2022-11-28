@@ -1,15 +1,11 @@
-\chapter{Propuesta}\label{chapter:proposal}
+\chapter{Propuesta de interfaz para la programación en $ C\sharp $ de \textit{chaincode} en HLF}\label{chapter:proposal}
 En el presente capítulo se explica la solución al problema fundamental de este trabajo. Se propone la creación de una \texttt{fabric-chaincode-api} que permita la implementación de contratos inteligentes en el lenguaje $ C\sharp $.
 
-El módulo principal de este proyecto lo constituye el \textit{chaincode shim }pues, expone la interfaz \texttt{IChaincode} al contrato inteligente. Por ello, se dedica la primera sección \ref{chaincodeshim} a analizar su estructura.
+El módulo principal de este proyecto lo constituye el \textit{chaincode shim }pues, expone la interfaz \texttt{IChaincode} al contrato inteligente. La primera sección \ref{chaincodeshim} analiza su estructura.
 
-En la sección \ref{components} se explican las funcionalidades y los detalles de implementación de los principales componentes del \textit{chaincode shim}.
+La sección \ref{components} explica las funcionalidades y los detalles de implementación de los principales componentes del \textit{chaincode shim}. En la sección \ref{protocolinteraction} se describe el protocolo de interacción entre el \textit{chaincode} y el nodo \textit{peer} desde las fases iniciales hasta la ejecución de transacciones. La sección \ref{concurrencymodel} trata el modelo de concurrencia implementado que posibilita procesar varias transacciones a la vez.
 
-La sección \ref{protocolinteraction} describe el protocolo de interacción entre el \textit{chaincode} y el nodo \textit{peer} desde las fases iniciales hasta la ejecución de transacciones.
-
-En la sección \ref{concurrencymodel} se trata el modelo de concurrencia implementado que posibilita procesar varias transacciones a la vez.
-
-Dentro del contexto de una transacción, en ocasiones se hace necesario interactuar con el \textit{ledger}, ya sea para consultas o modificaciones. En este proceso el \textit{peer} actúa como mediador, recibiendo las peticiones del \textit{chaincode} y devolviendo las respuestas. La sección \ref{ledgerinteraction} muestra la propuesta de solución que permite adaptar el proceso \textit{chaincode} a la recepción de dichas respuestas provenientes del \textit{peer}.
+Dentro del contexto de una transacción, en ocasiones se hace necesario interactuar con el \textit{ledger}, ya sea para consultas o modificaciones. En este proceso el \textit{peer} actúa como mediador, recibiendo las peticiones del \textit{chaincode} y devolviendo las respuestas. Por último, la sección \ref{ledgerinteraction} muestra nuestra propuesta de cómo adaptar el proceso \textit{chaincode} a la recepción de dichas respuestas provenientes del \textit{peer}.
 
 
 %\section{fabric-protos-csharp}
@@ -125,7 +121,7 @@ La interfaz IChaincodeStub se define en el archivo Interfaces.cs. Las capacidade
 \end{lstlisting}
 
 \subsection{ChaincodeStub}
-La clase \texttt{ChaincodeStub}, comúnmente llamada \textit{\textbf{stub}}, es la implementación predeterminada de la interfaz \texttt{IChaincodeStub}. Esta clase permite al \texttt{Chaincode} acceder a los servicios de invocación del \textit{ledger}. La estructura y los métodos del \textit{stub} se definen en el archivo \texttt{Stub.cs}.
+La clase \texttt{ChaincodeStub}, que comúnmente llamaremos \textit{\textbf{stub}}, es la implementación predeterminada de la interfaz \texttt{IChaincodeStub}. Esta clase permite al \texttt{Chaincode} acceder a los servicios de invocación del \textit{ledger}. La estructura y los métodos del \textit{stub} se definen en el archivo \texttt{Stub.cs}.
 
 %\colorbox{lightgray}{Insertar código ChaincodeStub}
 %
@@ -138,7 +134,7 @@ Las responsabilidades del \texttt{ChaincodeStub} son las siguientes:
 \item Preparar los datos para que el \textit{handler} envíe las  consultas al \textit{peer}.
 \end{enumerate}
 
-El \textit{handler} crea un nuevo \textit{stub} para cada invocación de transacción. Por lo tanto, el \textit{stub} solo tiene memoria del contexto de ejecución de la transacción actual.
+El \textit{handler} crea un nuevo \textit{stub} para cada invocación de transacción. Por lo tanto, el \textit{stub} solo tiene memoria del contexto de ejecución de la transacción actual. Esto implica que los contratos inteligentes sean \textit{stateless}, o sea, cualquier información adicional no convoyada con los argumentos del \textit{chaincode} debe leerse del \textit{ledger}.
 
 \section{Protocolo de interacción}\label{protocolinteraction}
 El \textit{shim} de Fabric admite dos modalidades de ejecución, que controlan el comportamiento de la conexión entre el \textit{chaincode} y el nodo \textit{peer} :
@@ -146,7 +142,7 @@ El \textit{shim} de Fabric admite dos modalidades de ejecución, que controlan e
 \begin{enumerate}
 \item \textbf{Chaincode como cliente:} esta es la modalidad por defecto y la única utilizada en Hyperledger Fabric v1.4 [\cite{hlf-internals}]. Presenta el proceso \textit{chaincode} como un cliente que inicia la conexión con el \textit{peer}.
 
-\item \textbf{Chaincode como servidor:} A partir de la versión 2.0, Hyperledger Fabric admite la implementación de \textit{chaincode} fuera de la blockchain [\cite{hlf-internals}]. De esta forma, el \textit{chaincode} se ejecuta como un servidor independiente del \textit{peer}.
+\item \textbf{Chaincode como un servicio externo:} A partir de la versión 2.0, Hyperledger Fabric admite la implementación de \textit{chaincode} fuera de la \textit{blockchain} [\cite{hlf-internals}]. De esta forma, el \textit{chaincode} se ejecuta como un servidor independiente del \textit{peer}.
 \end{enumerate}
 
 En este escenario, la inicialización admite el patrón \textbf{chaincode como  servidor}.
@@ -178,7 +174,7 @@ El ciclo de vida de la interacción se desarrolla en tres fases: \textbf{inicial
 %\item Inicia un servidor gRPC de tipo \texttt{EndorserServer}  para recibir propuestas de transacción para ser aprobadas.
 %\end{enumerate}
 
-En la fase de iniciaización, el \textit{shim} llama la función  \texttt{ChaincodeServer.Start()}, encargada de realizar las siguientes operaciones:
+En la fase de inicialización, el \textit{shim} llama la función  \texttt{ChaincodeServer.Start()}, encargada de realizar las siguientes operaciones:
 
 \begin{enumerate}
 \item Inicialización del servidor gRPC, utilizado para conectarse con el \textit{peer} y configurar un flujo bidireccional para intercambiar instancias de \texttt{ChaincodeMessage}.
@@ -199,14 +195,14 @@ Una vez que se completa la fase de configuración, el \textit{chaincode} y el \t
 
 A partir de este punto, la interacción es impulsada por el \textit{peer}, como resultado de las operaciones que envían los clientes de la aplicación al mismo. Por lo general, implican el despliegue del \textit{chaincode} en un canal específico y la posterior invocación de transacciones en el contrato inteligente implementado.
 
-\begin{figure}[tbph]
-\centering
-\includegraphics[width=\textwidth]{Images/interaction_flow}
-\caption{Flujo de interacción entre \textit{peer}, \textit{handler} y \textit{chaincode}}
-\label{fig:interactionflow}
-\end{figure}
-
-La figura \ref{fig:interactionflow} muestra el flujo de interacción entre el \textit{shim}, el \textit{handler} y la implementación de \texttt{Chaincode} durante el procesamiento de una propuesta de transacción. El bucle de mensajes implementado en el método \texttt{Connect()} envía el mensaje al \textit{handler}, que lo procesa en función de su estado. 
+%\begin{figure}[tbph]
+%\centering
+%\includegraphics[width=\textwidth, height=7cm]{Images/interaction_flow}
+%\caption{Flujo de interacción entre \textit{shim}, \textit{handler} y \textit{chaincode}}
+%\label{fig:interactionflow}
+%\end{figure}
+%
+%La figura \ref{fig:interactionflow} muestra el flujo de interacción entre el \textit{shim}, el \textit{handler} y la implementación de \texttt{Chaincode} durante el procesamiento de una propuesta de transacción. El bucle de mensajes implementado en el método \texttt{Connect()} envía el mensaje al \textit{handler}, que lo procesa en función de su estado. 
 %
 %La ruta más relevante para estos flujos es lo que sucede cuando el \textit{handler} está en estado \texttt{READY} y procesa invocaciones de transacciones a través del método \texttt{handleTransaction(ChaincodeMessage msg)} o respuestas a solicitudes al \textit{peer} por parte del chaincode a través del método\texttt{ handleResponse(ChaincodeMessage msg)}.
 
@@ -256,7 +252,8 @@ public async void HandleReady(ChaincodeMessage chaincodeMessage)
 }
 \end{lstlisting}
 
-Se manejan tres casos diferentes, dos de ellos dan como resultado la ejecución asíncrona de los métodos del \textit{chaincode}: \texttt{chaincode.Init()} y \texttt{chaincode.Invoke()}. El procesamiento de los mensajes \texttt{RESPONSE} del \textit{peer} se maneja dentro del mismo hilo.\\
+Se manejan tres casos diferentes, dos de ellos dan como resultado la ejecución asíncrona de los métodos: \texttt{HandleInit()} y \texttt{HandleInvoke()}. Se define el método como \texttt{async} para evitar bloquear el ciclo de recepción de mensajes y poder procesar otras propuestas de transacciones de forma concurrente.
+El procesamiento de los mensajes \texttt{RESPONSE} del \textit{peer} se maneja dentro del mismo hilo.\\
 
 La tramitación de los dos tipos de propuestas se deja a las siguientes funciones:\\
 
@@ -265,7 +262,7 @@ La tramitación de los dos tipos de propuestas se deja a las siguientes funcione
 	public async Task HandleTransaction(ChaincodeMessage msg) {...}
 \end{lstlisting}
 
-Estas funciones tienen esencialmente la misma lógica que comprende los siguientes pasos:
+Ambas definen \texttt{Task} como tipo de retorno  para representar una operación que se ejecuta de forma asíncrona pero no devuelve un valor. Estas funciones tienen esencialmente la misma lógica que comprende los siguientes pasos:
 
 \begin{enumerate}
 \item Deserialización de la instancia \texttt{ChaincodeInput} a partir de la información en \texttt{ChaincodeMessage}.
@@ -285,7 +282,7 @@ La figura \ref{fig:concurrencyModel} muestra una vista del modelo de concurrenci
 
 \begin{figure}[tbph]
 \centering
-\includegraphics[width=\textwidth]{Images/concurrency_model}
+\includegraphics[width=\textwidth]{Images/threads}
 \caption{Modelo de concurrencia}
 \label{fig:concurrencyModel}
 \end{figure}
@@ -305,7 +302,7 @@ Existen tres hilos principales que definen el flujo:
 Este modelo de ejecución permite que el proceso del \textit{chaincode} aumente el rendimiento, pues las propuestas de transacción se ejecutan de forma asíncrona, dejando libre al hilo principal para procesar otras solicitudes.
 
 \section{Interacción con el ledger}\label{ledgerinteraction}
-Un requerimiento común de los desarrolladores de contratos inteligentes es poder consultar el \textit{ledger} dentro del contexto de una transacción, ya sea para leer o escribir en el mismo. Como el diseño del contrato inteligente es esencialmente \textit{stateless}\footnote{no almacena información entre ejecuciones distintas}, cualquier información adicional no convoyada con los argumentos del \textit{chaincode} debe leerse del \textit{ledger}. Esta invocación es mediada por el \textit{peer} y por lo tanto, es necesario establecer una comunicación con el mismo dentro del contexto de una transacción.
+Un requerimiento común de los desarrolladores de contratos inteligentes es poder consultar el \textit{ledger} dentro del contexto de una transacción, ya sea para leer o escribir en el mismo. Esta invocación es mediada por el \textit{peer} y por lo tanto, es necesario establecer una comunicación con el mismo dentro del contexto de una transacción.
 
 Para resolver este problema se tiene en el \textit{handler} una instancia de la clase \texttt{MessageQueue}, expuesta en el código \ref{code:messagequeue}.\\
 
@@ -342,7 +339,7 @@ Dado que las invocaciones a transacciones se realizan de forma concurrente, vari
 
 Cada vez que se necesite mandar un mensaje al \textit{peer} se llama al método \texttt{AskPeerAndListen()} representado en el código \ref{code:askpeer}. Este se encarga de añadir el mensaje a la cola correspondiente y crea un \texttt{Task} que permanecerá bloqueado hasta que el \textit{peer} devuelva la respuesta. \\
 
-\begin{lstlisting}[caption={Función \texttt{Handler.AspPeerAndListen<T>(...)}}, label={code:askpeer}]
+\begin{lstlisting}[caption={Función \texttt{Handler.AskPeerAndListen<T>(...)}}, label={code:askpeer}]
 private Task<T> AskPeerAndListen<T>(ChaincodeMessage message, MessageMethod method)
 {
 
@@ -359,7 +356,7 @@ private Task<T> AskPeerAndListen<T>(ChaincodeMessage message, MessageMethod meth
 Como se muestra en el código \ref{code:handleReady}, al recibir un mensaje tipo \texttt{RESPONSE}, el \textit{handler} llama al método\texttt{ HandleMessageResponse(response)}. Este procede a deserializar la respuesta y devolverla al \texttt{Task} correspondiente, lo que provoca el cierre del mismo. Luego, se elimina el mensaje de la cola y se envía el siguiente a través del método 
 \texttt{RemoveCurrentAndSendNextMessage()} presentado en el código \ref{code:sendnextmessage}.\\
 
-\begin{lstlisting}[caption={Función \texttt{RemoveCurrentAndSendNextMessage(...)} }]
+\begin{lstlisting}[caption={Función \texttt{RemoveCurrentAndSendNextMessage(...)} }, label={code:sendnextmessage}]
  private void RemoveCurrentAndSendNextMessage(string messageTxContextId)
 {
     if (!_txQueues.TryGetValue(messageTxContextId, out var messageQueue) || messageQueue.Count <= 0) return;
@@ -376,5 +373,5 @@ Como se muestra en el código \ref{code:handleReady}, al recibir un mensaje tipo
 }
 \end{lstlisting}
 
-Nótese que este procedimiento no impone restricciones al desarrollador del contrato inteligente, debido a la posibilidad de coexistencia de varios hilos dentro de una misma transacción usando funciones que requieran del \textit{peer}. Los mensajes se añadirán a la cola correspondiente y se enviarán uno a la vez, de forma que al recibir la respuesta del \textit{peer}, esta sólo puede corresponder al último mensaje enviado.
+Nótese que este procedimiento no impone restricciones al desarrollador del contrato inteligente, debido a la posibilidad de coexistencia de varios hilos dentro de una misma transacción usando funciones que requieran del \textit{peer}. Los mensajes se añadirán a la cola correspondiente y se enviarán uno a la vez, de forma que, al recibir la respuesta del \textit{peer}, esta sólo puede corresponder al último mensaje enviado.
 

@@ -1,18 +1,19 @@
 \chapter{Estado del Arte}\label{chapter:state-of-the-art}
 
-En el presente capítulo se exponen los conceptos básicos que permiten familiarizarse con el funcionamiento de las \textit{blockchains} y con las funciones y componentes específicos de Hyperledger Fabric. Además, se analizarán las bibliotecas que  actualmente posibilitan el desarrollo de contratos inteligentes en otros lenguajes de programación (Go, Java, Node.js).
+En el presente capítulo se exponen los conceptos básicos para familiarizarse con el funcionamiento de las \textit{blockchains} y con las funciones y componentes específicos de Hyperledger Fabric. Además, se analizarán las bibliotecas que  actualmente posibilitan el desarrollo de contratos inteligentes en los lenguajes de programación Go, Java y Node.js.
 
 \section{Qué es una Blockchain}
-En esencia, una blockchain es un \textbf{\textit{ledger}} distribuido que registra todas las transacciones que tienen lugar en la red. El \textit{ledger} de una \textit{blockchain} a menudo se describe como descentralizado porque se replica entre muchos participantes de la red, cada uno de los cuales colabora en su mantenimiento.
+En esencia, una \textit{blockchain} es un registro (\textbf{\textit{ledger}} en lo adelante) distribuido que registra todas las transacciones que tienen lugar en la red. El \textit{ledger} de una \textit{blockchain} también se describe como descentralizado porque se replica entre muchos de los participantes de la red, cada uno de los cuales colabora en su integridad y mantenimiento.
 
-La información registrada en una \textit{blockchain}, además de ser \textbf{descentralizada} y \textbf{colaborativa}, sólo se puede agregar. Esto significa que no se puede modificar los datos de una transacción después de ser añadida al \textit{ledger}. Esta propiedad de inmutabilidad simplifica la determinación de la procedencia de la información pues los participantes pueden estar seguros de que esta no ha cambiado después de añadirse a la \textit{blockchain}.
+La información registrada en una \textit{blockchain}, además de ser \textbf{descentralizada} y \textbf{colaborativa}, es inmutable. Es decir, sólo se puede agregar información pero no se puede modificar. Esto significa que no se pueden cambiar los datos de una transacción una vez que es añadida al \textit{ledger}. Esta propiedad simplifica la determinación de la procedencia de la información pues los participantes pueden estar seguros de que esta no ha cambiado después de añadirse a la \textit{blockchain}.
 
-Con el fin de respaldar la actualización constante de la información, y  habilitar una gran cantidad de funciones del \textit{ledger} (transacciones, consultas, entre otros), una red  blockchain utiliza \textbf{contratos inteligentes}. Estos constituyen una forma de proporcionar acceso controlado al \textit{ledger}.
+Con el fin de respaldar la actualización constante de la información, y  habilitar una gran cantidad de funciones y reglas al funcionamiento del \textit{ledger} (transacciones, consultas, entre otros), una red  \textit{blockchain} utiliza \textbf{contratos inteligentes}. Estos constituyen una forma de proporcionar acceso controlado al \textit{ledger}.
 
 Una red  \textit{blockchain} se compone principalmente de un conjunto de \textbf{nodos \textit{peers}} (o simplemente \textit{peers}). Dichos nodos son un elemento fundamental de la red debido a que alojan \textit{ledgers} y contratos inteligentes.
 
-Se le llama \textbf{consenso} al proceso de mantener las transacciones sincronizadas a través de la red con el objetivo de garantizar que los \textit{ledgers} se actualicen solo cuando las transacciones sean aprobadas por los participantes apropiados; y con las transacciones en el mismo orden.
+Se le llama \textbf{consenso} al proceso de mantener las transacciones sincronizadas a través de la red con el objetivo de garantizar que los \textit{ledgers} se actualicen solo cuando las transacciones sean aprobadas por los nodos de la red participantes apropiados de acuerdo a un protocolo conveniado y aceptado por todos.
 
+Existen distintos tipos de blockchains según los permisos que otorga a sus participantes. Las \textit{blockchains} públicas permiten que cualquiera pueda acceder a ellas mientras que, las privadas están cerradas solo para usuarios específicos. Las \textit{blockchains} "permisionadas" son un híbrido de las anteriores pues, cualquiera puede acceder siempre que tenga permiso de los administradores para hacerlo.
 \section{Hyperledger Fabric}
 
 Hyperledger Fabric, o simplemente Fabric, es uno de los proyectos de \textit{blockchain} dentro de Hyperledger [\cite{hyperledger-foundation}], auspiciado por la Fundación Linux [\cite{linux-foundation}]. Es una plataforma de \textbf{tecnología de \textit{ledger} distribuido} (DLT por sus siglas en inglés) de código abierto, diseñada para su uso en contextos empresariales. Además, se define como una red permisionada, de modo que los participantes se conocen entre sí, en lugar de ser anónimos. 
@@ -21,18 +22,17 @@ La figura \ref{fig:hlfcomponents} expone las principales componentes de Hyperled
 
 \begin{figure}[tbph]
 \centering
-\includegraphics[width=\textwidth]{Images/hlf_components}
+\hspace*{-1.0in}
+\includegraphics[width=20cm]{Images/hlf1}
 \caption{Componentes de Hyperledger Fabric}
 \label{fig:hlfcomponents}
 \end{figure}
 
 
-Al igual que otras tecnologías \textit{blockchain}, Hyperledger Fabric cuenta con un \textit{\textbf{ledger}}, utiliza \textbf{contratos inteligentes} y es un sistema mediante el cual los participantes realizan sus \textbf{transacciones}.
+Las redes de Hyperledger Fabric son administradas por una colección de \textbf{organizaciones}. Los llamados nodos \textit{peer} son propiedad de estas organizaciones y sus puntos de conexión a la red, por ende, son fundamentales para construir este tipo de red distribuida. 
 
-Las redes de Hyperledger Fabric son administradas por una colección de \textbf{organizaciones}. Los nodos \textit{\textbf{peer}} son propiedad de estas organizaciones y sus puntos de conexión a la red, por ende, son fundamentales para construir este tipo de red distribuida. 
-
-Al ser una plataforma permisionada, Hyperledger Fabric permite la confidencialidad a través de \textbf{canales}. En estos, los participantes establecen una \textit{sub-red} donde cada miembro tiene visibilidad de un conjunto particular de transacciones. Así, solo aquellos nodos que participan en un canal tienen acceso al contrato inteligente y a los datos transados, preservando la privacidad y confidencialidad de ambos.
-Esta es una opción especialmente importante para las redes en las que algunos participantes pueden ser competidores y no desean que cada transacción sea conocida por el resto de la red. 
+Al ser una plataforma "permisionada", Hyperledger Fabric permite la confidencialidad a través de \textbf{canales}. En estos, los participantes establecen una \textit{sub-red} donde cada miembro tiene visibilidad de un conjunto particular de transacciones. De este modo, solo aquellos nodos que participan en un canal tienen acceso al contrato inteligente y a los datos transados en ese canal, preservando la privacidad y confidencialidad de ambos.
+Esta es una opción especialmente importante para las redes en las que algunos participantes no tienen por qué confiar entre ellos. 
 
 %Fabric es la primera plataforma DLT que admite \textbf{contratos inteligentes} creados en lenguajes de programación de propósito general como Java, Go y Node.js, en lugar de lenguajes específicos de dominio restringidos (DSL).
 
@@ -40,46 +40,45 @@ Esta es una opción especialmente importante para las redes en las que algunos p
 
 El \textit{ledger} de Hyperledger Fabric consta de dos componentes: el \textbf{world state} y el \textbf{registro de transacciones}. Cada participante tiene una copia del \textit{ledger} de cada red de Hyperledger Fabric a la que pertenece.
 
-El componente de \textit{world state} describe el estado del \textit{ledger} en un momento determinado y constituye la base de datos del mismo. El componente de registro de transacciones almacena todas las transacciones que dieron como resultado el valor actual del \textit{world state}, o sea, es el historial de actualizaciones del \textit{world state}. En consecuencia, el \textit{ledger} está conformado por la base de datos del \textit{world state} y el historial del registro de transacciones.
+El componente de \textit{world state} describe el estado del \textit{ledger} en un momento determinado para no tener en una consulta que recorrer todo el registro de transacciones. El componente de registro de transacciones almacena el historial de actualizaciones que dieron como resultado el valor actual del \textit{world state}. En consecuencia, el \textit{ledger} está conformado propiamente por la base de datos del \textit{world state} y el historial del registro de transacciones.
 
 \subsection{Contratos inteligentes}
 
-Los desarrolladores de aplicaciones de cada organización pueden crear \textbf{contratos inteligentes }para implementar la lógica de negocio de un proceso comercial compartido por los miembros del consorcio. Los contratos inteligentes se utilizan con el fin de asistir en la generación de \textbf{transacciones}, las cuales pueden ser distribuidas a cada nodo de la red.
+Los desarrolladores de aplicaciones de cada organización pueden crear contratos inteligentes para implementar la lógica de negocio de un proceso comercial compartido por los miembros del consorcio. Los contratos inteligentes se utilizan con el fin de asistir en la generación de transacciones, las cuales pueden ser distribuidas a cada nodo de la red.
 
-Los contratos inteligentes de Hyperledger Fabric se definen dentro del \textbf{\textit{chaincode}}. Se pueden definir múltiples contratos inteligentes en el mismo \textit{chaincode}. Cuando este se despliega en los nodos \textit{peer}, todos los contratos inteligentes dentro del mismo se hacen disponibles para las aplicaciones externas a la \textit{blockchain}. Una aplicación  invoca al contrato inteligente cuando esta necesita interactuar con el \textit{ledger}. 
+Los contratos inteligentes de Hyperledger Fabric se definen dentro de lo que se denomina \textbf{\textit{chaincode}}. Se pueden definir múltiples contratos inteligentes en el mismo \textit{chaincode}. Cuando éste se despliega en los nodos \textit{peer} entonces, todos los contratos inteligentes dentro del mismo se ponen a disposición de  las aplicaciones externas a la \textit{blockchain}. Una aplicación que necesite interactuar con el \textit{ledger} debe hacerlo entonces invocando a un  contrato inteligente. 
 
-En la mayoría de los casos, el \textit{chaincode} interactúa sólo con el componente de la base de datos del ledger, el \textbf{\textit{world state}} (consultándolo, por ejemplo) y no con el registro de transacciones.
+Para la mayoría de los casos, es suficiente que el \textit{chaincode} interactúe sólo con el \textbf{\textit{world state}} (por ejemplo haciendo consultas) y no con el registro de transacciones del \textit{ledger}.
 
-Los usuarios de Hyperledger Fabric a menudo usan los términos \textbf{contrato inteligente} y \textbf{\textit{chaincode}} indistintamente. En general, un contrato inteligente define la lógica de transacción que controla el ciclo de vida de un objeto contenido en el \textit{world state}; luego, este se empaqueta en un \textit{chaincode} para desplegarse en una red \textit{blockchain}.
+Los usuarios de Hyperledger Fabric a menudo usan los términos contrato inteligente y \textit{chaincode} indistintamente. En general, un contrato inteligente define la lógica de transacción que controla el ciclo de vida de un objeto contenido en el \textit{world state}; luego, este se empaqueta en un \textit{chaincode} para desplegarse en una red \textit{blockchain}.
 
 \subsection{Consenso}
-Las transacciones deben escribirse en el ledger en el orden en que ocurren, aunque puedan ser entre diferentes conjuntos de participantes dentro de la red. Para que esto suceda, se debe establecer el orden de las transacciones y se debe implementar un método encargado de rechazar transacciones incorrectas que se intenten insertar en el ledger por error o maliciosamente.
+Las transacciones deben escribirse en el \textit{ledger} en el orden en que los nodos \textit{orderers} las almacena en el bloque, aunque esto puede estar sucediendo en diferentes conjuntos de participantes dentro de la red. Para lograr esto, se debe establecer el orden de las transacciones y se debe implementar un método que se encargue de rechazar transacciones incorrectas que se intenten insertar en el\textit{ ledger}, sea por error o maliciosamente.
 
-Los \textit{peers} ejecutan un \textbf{protocolo de consenso} que abarca desde la propuesta y la aprobación de transacciones hasta el orden, la validación y el despliegue de las mismas a través de la red.
-En pocas palabras, el \textbf{consenso} se define como la verificación completa de la correctitud de un conjunto de transacciones que componen un bloque [\cite{hlf-doc}].
+Se establece un  \textbf{protocolo de consenso} entre los nodos clientes,  \textit{peers} y \textit{orderers} que abarca desde la propuesta y la aprobación de transacciones hasta el orden, la validación y el despliegue de las mismas a través de la red. En pocas palabras, el \textbf{consenso} se define como la verificación completa de que el conjunto de transacciones que compondrán un bloque es correcto[\cite{hlf-doc}].
 
-El consenso está mediado por nodos especiales llamados \textit{\textbf{orderers}}, encargados de ordenar las transacciones. Un conjunto de nodos \textit{orderers} forman un \textbf{\textit{ordering service}}. Además de su rol de ordenar, estos nodos también mantienen la lista de organizaciones que pueden crear canales. Esta lista se conoce como el \textbf{consorcio}.
+%El consenso está mediado por nodos especiales llamados \textit{\textbf{orderers}}, encargados de ordenar las transacciones. Un conjunto de nodos \textit{orderers} forman un \textbf{\textit{ordering service}}. Además de su rol de ordenar, estos nodos también mantienen la lista de organizaciones que pueden crear canales. Esta lista se conoce como el \textbf{consorcio}.
 
 %Sin embargo, el consenso abarca más que simplemente acordar el orden de las transacciones, y esta diferenciación se destaca en Hyperledger Fabric a través de su papel fundamental en todo el flujo de transacciones, desde la propuesta y el respaldo hasta el pedido, la validación y el compromiso. 
 
 \subsection{Arquitectura \textit{execute-order-validate}.}
 
-Fabric admite el uso de lenguajes de programación estándar en sus contratos inteligentes. Esto gracias a que implementa una arquitectura \textit{execute-order-validate} para el manejo de ejecución de transacciones.
+Fabric admite el uso de lenguajes de programación tradicionales para implementar sus contratos inteligentes. Esto gracias a que se basa en una arquitectura \textit{execute-order-validate} para el manejo de ejecución de transacciones.
 
 %Para entender por qué es posible añadir $C\sharp$ a la lista de lenguajes soportados por Hyperledger Fabric para programar contratos inteligentes, se dedicará esta sección a explicar dicha arquitectura.
 
-Todos los sistemas de blockchains anteriores a Hyperledger Fabric, permisionados o no, siguen la arquitectura  \textit{order-execute} [\cite{hlf-paper}] para la gestión de transacciones. Esto significa que la red blockchain ordena las transacciones primero, utilizando un protocolo de consenso, y luego los ejecuta en el mismo orden en todos los nodos \textit{peer} secuencialmente.
+Todos los sistemas de \textit{blockchains} anteriores a Hyperledger Fabric, permisionados o no, siguen la arquitectura  \textit{order-execute} [\cite{hlf-paper}] para la gestión de transacciones. Esto significa que la red \textit{blockchain} ordena las transacciones primero, utilizando un protocolo de consenso, y luego los ejecuta secuencialmente en el mismo orden en todos los nodos \textit{peer}.
 
 %La arquitectura \textit{order-execute} es conceptualmente simple y por lo tanto también muy utilizada. Sin embargo, tiene varios inconvenientes cuando se implementa en una blockchain autorizada de uso general.
 
-Un problema importante para una arquitectura \textit{order-execute} son las transacciones no deterministas. Las operaciones que se ejecutan después del consenso deben ser deterministas o el \textit{ledger} distribuido se “bifurca” y viola la premisa básica de una blockchain, la cual garantiza un estado consistente entre todos los nodos \textit{peers}, es decir, todos presenten el mismo estado en sus respectivos \textit{ledger}. Esto generalmente se aborda mediante la programación de \textit{blockchains} en un DSL (ej. Ethereum Solidity), pues son lo suficientemente expresivos para sus aplicaciones pero limitados a una ejecución determinista.
+Un problema importante para este tipo de arquitectura \textit{order-execute} son las transacciones no deterministas. Las operaciones que se ejecutan después del consenso deben ser deterministas, ya que sino el \textit{ledger} distribuido se “bifurcaría” y se violaría la premisa básica de una \textit{blockchain}, que es garantizar que todos los nodos \textit{peers} presenten el mismo estado en sus respectivos \textit{ledger}. Esto se puede lograr usando un lenguaje específico de dominio (DSL) para la programación (como es el caso de Ethereum con Solidity), que pueden ser bien expresivos para ellos pero estás limitados cuando no hay una ejecución determinista.
 
-Dichos lenguajes son difíciles de diseñar y requieren generalmente una asimilación de aprendizaje adicional por parte del programador. La redacción de contratos inteligentes en un lenguaje de propósito general (p. ej., Go, Java, C/C++) parece más atractivo y acelera la adopción de soluciones \textit{blockchain}.
+Poder desarrollar contratos inteligentes en lenguajes de propósito general (como Go, Java, C/C++ y C$\sharp$ en el caso que nos ocupa en este trabajo)puede facilitar y acelerar la adopción de soluciones \textit{blockchain} entre los desarrolladores con experiencia en estos lenguajes.
 
 %Desafortunadamente, los lenguajes de propósito general plantean muchos problemas para garantizar una ejecución determinista. Incluso si el desarrollador de la aplicación no introduce operaciones obviamente no deterministas, detalles ocultos de implementación pueden tener el mismo efecto devastador (por ejemplo, un
 %iterador de mapa no es determinista en Go).
 
-Fabric introduce la arquitectura \textit{order-execute-validate} y no sigue el diseño \textit{order-execute} anteriormente mencionado. La figura \ref{fig:transactionflow} muestra el flujo de una transacción bajo este nuevo modelo.\\[5cm]
+Fabric introduce la arquitectura \textit{execute-order-validate} que no sigue el diseño \textit{order-execute} anteriormente mencionado. La figura \ref{fig:transactionflow} muestra el flujo de una transacción bajo este nuevo modelo.\\[5cm]
 
 \begin{figure}[tbph]
 \centering
@@ -97,7 +96,7 @@ Fabric aborda los desafíos de resiliencia, flexibilidad, escalabilidad, rendimi
    \item \textbf{validar} transacciones contra una política de aprobación específica de la aplicación antes de actualizar el \textit{ledger}.
 \end{enumerate}
 
-Este diseño se aparta del paradigma \textit{order-execute} pues Fabric ejecuta transacciones antes de llegar a un acuerdo final sobre su orden. De esta forma se elimina cualquier no determinismo, ya que los resultados inconsistentes se pueden filtrar antes de ordenar.
+Este diseño se aparta del paradigma \textit{order-execute} pues Fabric ejecuta transacciones antes de llegar a un acuerdo final sobre su orden. De esta forma se elimina cualquier no determinismo, ya que los resultados inconsistentes se pueden filtrar antes de pretender ordenarlos.
 
 Al eliminar el no determinismo, Fabric permite el uso de lenguajes de programación estándar en sus contratos inteligentes. 
 
@@ -131,28 +130,28 @@ Al eliminar el no determinismo, Fabric permite el uso de lenguajes de programaci
 
 
 \section{fabric-contract-apis y fabric-chaincode-apis}
-En este documento se propone la biblioteca \texttt{fabric-chaincode-csharp} como una herramienta para implementar contratos inteligentes en $ C\sharp $. Por ello, antes de comenzar a describir dicha solución, se hace necesario analizar las ya existentes para otros lenguajes de programación.
+Como ya se dijo, el objetivo de este trabajo de tesis es proponer una biblioteca \texttt{fabric-chaincode-csharp} que permita implementar contratos inteligentes en el lenguaje $ C\sharp $. Por ello, antes de describir dicha solución, es necesario analizar las ya existentes para otros lenguajes.
 
-Para respaldar el desarrollo de contratos inteligentes (\textit{chaincode}), Hyperledger Fabric ofrece dos APIs por cada lenguaje de programación actualmente soportado (Go, Java y Node.js). Dichas bibliotecas son las llamadas: \texttt{fabric-chaincode-apis }y las \texttt{fabric-contract-api}s.
+Para respaldar el desarrollo de contratos inteligentes (\textit{chaincode}), Hyperledger Fabric ofrece dos APIs por cada lenguaje uno de los lenguajes Go, Java y Node.js. Dichas bibliotecas son las llamadas: \texttt{fabric-chaincode-apis }y las \texttt{fabric-contract-api}s.
 
-Las \texttt{fabric-chaincode-apis} son responsables de ejecutar el contrato inteligente, hacerlo accesible para el nodo \textit{peer} y administrar toda la interacción de bajo nivel entre ambos elementos a través de gRPC[\cite{grpc-doc}]. Además, proporcionan la interfaz  \texttt{Chaincode} al contrato inteligente para acceder a los servicios de invocación del \textit{ledger} y el \textit{chaincode}. El módulo chaincode shim, o simplemente shim, constituye el componente principal de las fabric-chaincode-apis.
+Las \texttt{fabric-chaincode-apis} son responsables de ejecutar el contrato inteligente, hacerlo accesible para el nodo \textit{peer} y administrar toda la interacción de bajo nivel entre ambos elementos a través de Llamada a Procedimiento Remoto (gRPC por sus siglas en inglés). Además, proporcionan la interfaz  \texttt{Chaincode} al contrato inteligente para acceder a los servicios de invocación del \textit{ledger} y el \textit{chaincode}. El módulo chaincode shim, o simplemente shim, constituye el componente principal de las fabric-chaincode-apis.
 
-Las \texttt{fabric-contract-apis} importan las bibliotecas \texttt{fabric-chaincode-apis }y  proveen la interfaz \texttt{Contract}. Esta constituye un punto de entrada de alto nivel que permite abstraer al desarrollador de procedimientos de configuración de la red y concentrarse en implementar la lógica empresarial.
-
-Se hace necesaria 
+A su vez, las \texttt{fabric-contract-apis} importan las bibliotecas \texttt{fabric-chaincode-apis }y  proveen la interfaz \texttt{Contract}. Esta interfaz constituye un punto de entrada de alto nivel que permitirá al desarrollador abstraerse de los procedimientos de configuración de la red y concentrarse en implementar la lógica empresarial.
+%
+%Se hace necesaria 
 %
 %Ambas bibliotecas propician al desarrollador las herramientas necesarias para implementar contratos inteligentes. En los lenguajes Java y Node.js las fabric-chaincode-apis conforman un módulo dentro de la biblioteca fabric-contract-api. En Go implementa la fabric-chaincode-api 
 
 Actualmente existen tres lenguajes que implementan estas bibliotecas: Go, Java y Javascript/Typescript. Cada una de estas propuestas proveen soluciones distintas a problemas como son: el manejo concurrente de transacciones y la interacción con el peer. A continuación se analizan dichas propuestas.
 
 \subsection{Manejo concurrente de transacciones}
-Todas las bibliotecas son capaces de ejecutar múltiples transacciones a la vez (de forma asíncrona). En Go se inicia una \textit{\textbf{rutina go}} para manejar las propuestas de transacciones que vienen del \textit{peer}, mientras que las respuestas de consultas al \textit{ledger} son tratadas en el hilo principal. Por otro lado, en Javascript/Typescript se crea un hilo (\textit{\textbf{stream}}) por cada mensaje recibido, independientemente de su tipo. Lo mismo sucede con la biblioteca de Java.
+Todas las bibliotecas son capaces de ejecutar asíncronamente múltiples transacciones a la vez. En Go se inicia una \textit{\textbf{rutina go}} para manejar las propuestas de transacciones que vienen del \textit{peer}, mientras que las respuestas de consultas al \textit{ledger} son tratadas en el hilo principal. Por otro lado, en Javascript/Typescript se crea un hilo (\textit{\textbf{stream}}) por cada mensaje recibido, independientemente de su tipo. Lo mismo sucede con la biblioteca de Java.
 \subsection{Interacción con el peer} 
 Dentro del contexto de una transacción, muchas veces es necesario hacer consultas al \textit{ledger} a través del \textit{peer}. Al ejecutarse las transacciones de forma asíncrona, se requiere organizar este intercambio de mensajes de alguna forma. 
 
-Go crea un diccionario donde a cada transacción se le asocia un \textbf{canal} por donde se envían y reciben mensajes del \textit{peer}. El acceso a dicho diccionario se regula con un objeto \textit{mutex} para asegurar que solo una \textit{rutina go} lo modifique a la vez. Este acercamiento impone como restricción que sólo se puede establecer una comunicación con el peer dentro del contexto de una transacción, es decir, los contratos inteligentes no pueden crear \textit{rutinas go} que interactúen con el peer.
+Go crea un diccionario donde a cada transacción se le asocia un objeto  \textbf{\textit{channel}} por donde se envían y reciben mensajes del \textit{peer}. El acceso a dicho diccionario se regula con un objeto \textit{mutex} para asegurar que solo una \textit{rutina go} lo pueda modificar a la vez. Este acercamiento impone como restricción que sólo se puede establecer una comunicación con el \textit{peer} dentro del contexto de una transacción, es decir, los contratos inteligentes no pueden crear \textit{rutinas go} que interactúen con el \textit{peer}.
 
-Por otra parte, Javascript/TypeScript y Java implementan la clase \texttt{MsgQueueHandler}. Esta contiene un diccionario donde a cada transacción se le asocia una cola de mensajes. Así, se permite realizar solicitudes concurrentes pues, los mensajes serán añadidos a la cola y enviados uno a uno. Cada vez que se envía una consulta al peer se espera por la respuesta para mandar la próxima.
+Por otra parte, Javascript/TypeScript y Java implementan la clase \texttt{MsgQueueHandler}. Esta contiene un diccionario donde a cada transacción se le asocia una cola de mensajes. De modo que así, se pudieran realizar solicitudes concurrentes pues, los mensajes serán añadidos a una cola para ser enviados uno a uno. Cada vez que se envía una consulta al \textit{peer} se espera por la respuesta para poder mandar la próxima.
 
 % un diccionario donde a cada transaccion se le asocia una cola de mensajes. Este acercamiento no impone restricciones al programador pues, aunque existan varios hilos dentro del contrato intelligente la cola garantiza que se envíen en el orden correcto.
 %Un contrato inteligente se define dentro de un chaincode. Se pueden definir múltiples contratos inteligentes dentro del mismo chaincode. Cuando se implementa un chaincode, todos los contratos inteligentes dentro de él se ponen a disposición de las aplicaciones.
@@ -167,24 +166,25 @@ Por otra parte, Javascript/TypeScript y Java implementan la clase \texttt{MsgQue
 %\end{figure}
 
 \section{gRPC y \textit{protocol buffers}}
-Como se mencionaba anteriormente, en el \textit{chaincode} se define la lógica de negocio de la aplicación \textit{blockchain} utilizando un lenguaje de programación de propósito general. Los \textit{chaincode} se ejecutan en un entorno desacoplado al resto del nodo \textit{peer}. De esta forma, el \textit{peer} es independiente del lenguaje real en el que se implementa el chaincode. Para cumplir el propósito de este trabajo es necesario implementar un \textit{chaincode} en $ C\sharp$, lenguaje distinto al del nodo peer (Go). En esta sección se explica gRPC  [\cite{grpc-doc}]\footnote{Llamada a Procedimiento Remoto gRPC}, herramienta que permite la comunicación entre ambos elementos. 
+Como se mencionaba anteriormente, en el \textit{chaincode} se define la lógica de negocio de la aplicación \textit{blockchain} utilizando un lenguaje de programación de propósito general. Los \textit{chaincode} se ejecutan en un entorno desacoplado al resto del nodo \textit{peer}. De esta forma, el \textit{peer} es independiente del lenguaje real en el que se implementa el chaincode. Para cumplir el propósito de este trabajo es necesario implementar un \textit{chaincode} en $ C\sharp$, lenguaje distinto al del nodo \textit{peer} (Go). En esta sección se explica gRPC  [\cite{grpc-doc}], herramienta que permite la comunicación entre ambos elementos. 
 
 En gRPC, una aplicación cliente puede llamar directamente a un método en una aplicación servidor en una máquina diferente como si fuera un objeto local, lo que facilita la creación de aplicaciones y servicios distribuidos que necesitan operar en tiempo real. 
 
 %Como en muchos sistemas RPC, gRPC se basa en la idea de definir un servicio, especificando los métodos que se pueden llamar de forma remota con sus parámetros y tipos de devolución. En el lado del servidor, se implementa una interfaz para manejar las llamadas de los clientes. En el lado del cliente se tiene el \textit{stub}),el cual proporciona los mismos métodos que el servidor.
 
-La diferencia con otros frameworks RPC existentes radica en la capacidad de gRPC de utilizar \textit{protocol buffers} [\cite{protobuf-doc}] como lenguaje de definición de interfaz para la serialización y como formato de intercambio de mensajes, en lugar de JSON/XML.
-%
-Los \textit{protocol buffers} proporcionan un mecanismo extensible, independiente del idioma y de la plataforma, para serializar datos estructurados de manera compatible con versiones anteriores y posteriores. Se pueden ampliar con nueva información sin invalidar los datos existentes ni requerir que se actualice el código.
+La diferencia con otros \textit{frameworks} RPC radica en la capacidad de gRPC de utilizar \textit{protocol buffers} [\cite{protobuf-doc}] como lenguaje de definición de interfaz para la serialización y como formato de intercambio de mensajes, en lugar de JSON/XML.
+
+
+Los \textit{protocol buffers} proporcionan un mecanismo extensible, independiente del lenguaje y de la plataforma, para serializar datos estructurados de manera compatible con versiones anteriores y posteriores. Se pueden ampliar con nueva información sin invalidar los datos existentes ni requerir que se actualice el código.
 
 \begin{figure}[tbph]
 \centering
-\includegraphics[width=\textwidth]{Images/grpc}
+\includegraphics[width=\textwidth]{Images/protoserver}
 \caption{ Interacción entre cliente y servidor en gRPC.}
 \label{fig:grpc}
 \end{figure}
 
-Los clientes y servidores de gRPC pueden ejecutarse y comunicarse entre sí en una variedad de entornos y pueden escribirse en cualquiera de los idiomas compatibles con gRPC. La figura \ref{fig:grpc} muestra un ejemplo de servidor gRPC en $ C++ $ con clientes Ruby y Java. En la solución propuesta en este artículo se aprovecha dicha característica para brindar una interfaz de comunicación entre el nodo \textit{peer} y el \textit{chaincode}, escritos en Go y $ C\sharp$ respectivamente.
+Los clientes y servidores de gRPC pueden ejecutarse y comunicarse entre sí en una variedad de entornos y pueden escribirse en cualquiera de los lenguajes compatibles con gRPC. La figura \ref{fig:grpc} muestra un ejemplo de servidor gRPC en $ C++ $ con clientes Ruby y Java. En la solución propuesta en nuestro trabajo se aprovecha dicha característica para brindar una interfaz de comunicación entre el nodo \textit{peer} que ya nos aporta HLF escrito en Go y el \textit{chaincode} que se quiere poder escribir en $ C\sharp$.
 
 
 

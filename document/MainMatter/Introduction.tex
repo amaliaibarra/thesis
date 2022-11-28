@@ -19,7 +19,7 @@ Por ello resulta de interés poder disponer de la capacidad de programación de 
 
 El \textbf{problema a resolver} consiste entonces en crear las condiciones técnicas y documentación necesaria para poder programar en $ C\sharp $ contratos inteligentes para Hyperledger Fabric.
 
-Para ello se propone construir una API \footnote{Interfaz de Programación de Aplicaciones} \textit{fabric-chaincode-csharp},  que proporcione una interfaz al contrato como punto de entrada de alto nivel para escribir la lógica empresarial.\\
+Para ello se propone construir una API \footnote{Interfaz de Programación de Aplicaciones} \texttt{fabric-chaincode-csharp},  que proporcione una interfaz al contrato como punto de entrada de alto nivel para escribir la lógica empresarial.\\
 
 Para el cumplimiento de este objetivo general se llevarán a cabo las \textbf{siguientes tareas}:
 
@@ -31,11 +31,13 @@ Para el cumplimiento de este objetivo general se llevarán a cabo las \textbf{si
 
 Además de esta introducción el presente trabajo consta de tres capítulos.
 
-En el capítulo \ref{chapter:state-of-the-art} se introducen los conceptos básicos que permiten familiarizarse con el funcionamiento de las \textit{blockchains} y con las funciones y componentes específicos de Hyperledger Fabric. A esto se suma un análisis de las bibliotecas que  actualmente posibilitan el desarrollo de contratos inteligentes en otros lenguajes de programación.
+En el capítulo \ref{chapter:state-of-the-art} se introducen los conceptos básicos que permiten familiarizarse con el funcionamiento de las \textit{blockchains} y con las funciones y componentes específicos de Hyperledger Fabric. Además se incluye un análisis de las bibliotecas que  actualmente posibilitan el desarrollo de contratos inteligentes en otros lenguajes de programación.
 
-El capítulo \ref{chapter:proposal} expone la solución al problema fundamental de este trabajo. Se propone la creación de una \texttt{fabric-chaincode-api} que permita la implementación de contratos inteligentes en el lenguaje $ C\sharp $.
+El capítulo \ref{chapter:proposal} expone la solución al problema fundamental de este trabajo que consiste en la creación de una \texttt{fabric-chaincode-api} que permita la implementación de contratos inteligentes en el lenguaje $ C\sharp $.
 
-En el capítulo \ref{chapter:implementation} se presentan los ejemplos de contratos inteligentes en el lenguaje $ C\sharp $ que fueron implementados usando la biblioteca \texttt{fabric-chaincode-csharp}. Se analizan sus limitaciones y se proponen aspectos a mejorar en trabajos futuros.
+En el capítulo \ref{chapter:implementation} se muestran algunos  ejemplos de contratos inteligentes escritos en $ C\sharp $ que fueron implementados usando esta biblioteca \texttt{fabric-chaincode-csharp}. 
+
+Por último, se analizan las limitaciones y se proponen aspectos a mejorar en trabajos futuros.
 
 
 

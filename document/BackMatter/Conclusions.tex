@@ -1,5 +1,14 @@
 \begin{conclusions}
-En el presente trabajo se realizó un resumen de los conceptos principales de Hyperledger Fabric. Se hizo énfasis en las características de diseño que hacen posible la programación de contratos inteligentes en lenguajes de propósito general. Cumpliendo con uno de los objetivos específicos de este trabajo, se llevó a cabo un estudio de las APIs existentes para Hyperledger Fabric que permiten escribir contratos inteligentes en otros lenguajes de programación. Se expusieron detalles del diseño e implementación de la biblioteca \texttt{fabric-chaincode-api} propuesta. Se muestran los resultados obtenidos mediante ejemplos de contratos inteligentes programados en $ C \sharp $. Por último se recomiendan tareas para mejorar la biblioteca propuesta en investigaciones futuras.
+%En el presente trabajo se realizó un resumen de los conceptos principales de Hyperledger Fabric. Se hizo énfasis en las características de diseño que hacen posible la programación de contratos inteligentes en lenguajes de propósito general.
 
-Los elementos anteriores contribuyeron al cumplimiento del objetivo general de este trabajo, el cual consiste en poder integrar la lógica de los contratos inteligentes programados en $ C \sharp $ dentro de la arquitectura de una \textit{blockchain} Hyperledger Fabric.
+En el presente trabajo se llevó a cabo un estudio de las APIs existentes para Hyperledger Fabric que permiten escribir contratos inteligentes en otros lenguajes de programación. Se expusieron detalles del diseño e implementación de la biblioteca \texttt{fabric-chaincode-api} propuesta y finalmente se muestran los resultados obtenidos mediante ejemplos de contratos inteligentes programados en $ C \sharp $. Estos elementos contribuyeron al cumplimiento del objetivo general de este trabajo, el cual consiste en poder integrar la lógica de los contratos inteligentes programados en $ C \sharp $ dentro de la arquitectura de una \textit{blockchain} Hyperledger Fabric.
+
+En la \texttt{fabric-chaincode-api} propuesta quedan pendientes de implementación las funciones que permiten realizar consultas enriquecidas, trabajar con datos privados y lanzar eventos a nivel de \textit{chaincode}. Esto limita las aplicaciones que utilicen esta biblioteca a trabajar solamente con las operaciones: Crear, Leer, Actualizar y Eliminar. Dicho esto, las áreas en las que orientar el futuro de \texttt{fabric-chaincode-csharp} son:
+    
+\begin{enumerate}
+\item Extender las funcionalidades expuestas en el \texttt{ChaincodeStub}.
+\item Diseño e implementación de la biblioteca de alto nivel\\ \texttt{fabric-contract-csharp}.
+\end{enumerate}
+
 \end{conclusions}
+%Por ejemplo, en Javascript/Typescript la \texttt{ChaincodeStubInterface} expone varios métodos que posibilita recibir una secuencia de datos del peer. Esta capacidad es útil pues permite, entre otras cosas, obtener un rango de llaves que cumplen con un determinado criterio o la recuperación de los cambios históricos realizados en el valor asociado a una llave.
