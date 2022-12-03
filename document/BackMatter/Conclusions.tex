@@ -1,13 +1,16 @@
 \begin{conclusions}
 %En el presente trabajo se realizó un resumen de los conceptos principales de Hyperledger Fabric. Se hizo énfasis en las características de diseño que hacen posible la programación de contratos inteligentes en lenguajes de propósito general.
 
-En el presente trabajo se llevó a cabo un estudio de las APIs existentes para Hyperledger Fabric que permiten escribir contratos inteligentes en otros lenguajes de programación. Se expusieron detalles del diseño e implementación de la biblioteca \texttt{fabric-chaincode-api} propuesta y finalmente se muestran los resultados obtenidos mediante ejemplos de contratos inteligentes programados en $ C \sharp $. Estos elementos contribuyeron al cumplimiento del objetivo general de este trabajo, el cual consiste en poder integrar la lógica de los contratos inteligentes programados en $ C \sharp $ dentro de la arquitectura de una \textit{blockchain} Hyperledger Fabric.
+A lo largo de este trabajo se describe el proceso de desarrollo de una biblioteca \texttt{fabric-chaincode-api} que permite implementar contratos inteligentes para Hyperledger Fabric empleando $ C \sharp $. Se estudiaron las APIs que permiten escribir contratos inteligentes en los lenguajes de programación: Go, Node.js y Java. Se explica la biblioteca \texttt{fabric-chaincode-csharp} mediante sus componentes principales y su solución a problemas como  el procesamiento concurrente de transacciones y la interacción con el \textit{ledger}. Se muestran los resultados obtenidos a partir de un ejemplo de contrato inteligente escrito en Csharp que permite interactuar con una \textit{blockchain} de Hyperledger Fabric mediante las operaciones: Crear, Leer, Actualizar y Eliminar.
+Estos elementos contribuyeron al cumplimiento del objetivo general de este trabajo, el cual consiste en poder integrar la lógica de los contratos inteligentes programados en $ C \sharp $ dentro de la arquitectura de una \textit{blockchain} Hyperledger Fabric.
+%Se expusieron detalles del diseño e implementación de la biblioteca \texttt{fabric-chaincode-api} propuesta y finalmente se muestran los resultados obtenidos mediante ejemplos de contratos inteligentes programados en $ C \sharp $. Estos elementos contribuyeron al cumplimiento del objetivo general de este trabajo, el cual consiste en poder integrar la lógica de los contratos inteligentes programados en $ C \sharp $ dentro de la arquitectura de una \textit{blockchain} Hyperledger Fabric.
 
-En la \texttt{fabric-chaincode-api} propuesta quedan pendientes de implementación las funciones que permiten realizar consultas enriquecidas, trabajar con datos privados y lanzar eventos a nivel de \textit{chaincode}. Esto limita las aplicaciones que utilicen esta biblioteca a trabajar solamente con las operaciones: Crear, Leer, Actualizar y Eliminar. Dicho esto, las áreas en las que orientar el futuro de \texttt{fabric-chaincode-csharp} son:
+\section*{Recomendaciones}
+En la \texttt{fabric-chaincode-api} propuesta quedan pendientes de implementación las funciones que permiten realizar consultas enriquecidas, trabajar con datos privados y lanzar eventos a nivel de \textit{chaincode}. Esto limita las aplicaciones que utilicen esta biblioteca a trabajar solamente con las operaciones: Crear, Leer, Actualizar y Eliminar. Por tanto, las áreas en las que orientar el futuro de \texttt{fabric-chaincode-csharp} son:
     
 \begin{enumerate}
-\item Extender las funcionalidades expuestas en el \texttt{ChaincodeStub}.
-\item Diseño e implementación de la biblioteca de alto nivel\\ \texttt{fabric-contract-csharp}.
+\item Extender las funcionalidades expuestas en el \texttt{ChaincodeStub} mediante la inclusión de los métodos: \texttt{GetHistoryForKey}, \texttt{GetPrivateData} y \texttt{GetStateByRange}.
+\item Diseño e implementación de la biblioteca  \texttt{fabric-contract-csharp} que exponga la clase \texttt{Contract} como punto de entrada de alto nivel que permita al desarrollador abstraerse de los procedimientos de configuración de la red y concentrarse en implementar la lógica empresarial.
 \end{enumerate}
 
 \end{conclusions}

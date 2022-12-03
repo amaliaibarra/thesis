@@ -48,7 +48,7 @@ Los desarrolladores de aplicaciones de cada organización pueden crear contratos
 
 Los contratos inteligentes de Hyperledger Fabric se definen dentro de lo que se denomina \textbf{\textit{chaincode}}. Se pueden definir múltiples contratos inteligentes en el mismo \textit{chaincode}. Cuando éste se despliega en los nodos \textit{peer} entonces, todos los contratos inteligentes dentro del mismo se ponen a disposición de  las aplicaciones externas a la \textit{blockchain}. Una aplicación que necesite interactuar con el \textit{ledger} debe hacerlo entonces invocando a un  contrato inteligente. 
 
-Para la mayoría de los casos, es suficiente que el \textit{chaincode} interactúe sólo con el \textbf{\textit{world state}} (por ejemplo haciendo consultas) y no con el registro de transacciones del \textit{ledger}.
+Para la mayoría de los casos, es suficiente que el \textit{chaincode} interactúe sólo con el \textbf{\textit{world state}} (por ejemplo, haciendo consultas) y no con el registro de transacciones del \textit{ledger}.
 
 Los usuarios de Hyperledger Fabric a menudo usan los términos contrato inteligente y \textit{chaincode} indistintamente. En general, un contrato inteligente define la lógica de transacción que controla el ciclo de vida de un objeto contenido en el \textit{world state}; luego, este se empaqueta en un \textit{chaincode} para desplegarse en una red \textit{blockchain}.
 
@@ -71,7 +71,7 @@ Todos los sistemas de \textit{blockchains} anteriores a Hyperledger Fabric, perm
 
 %La arquitectura \textit{order-execute} es conceptualmente simple y por lo tanto también muy utilizada. Sin embargo, tiene varios inconvenientes cuando se implementa en una blockchain autorizada de uso general.
 
-Un problema importante para este tipo de arquitectura \textit{order-execute} son las transacciones no deterministas. Las operaciones que se ejecutan después del consenso deben ser deterministas, ya que sino el \textit{ledger} distribuido se “bifurcaría” y se violaría la premisa básica de una \textit{blockchain}, que es garantizar que todos los nodos \textit{peers} presenten el mismo estado en sus respectivos \textit{ledger}. Esto se puede lograr usando un lenguaje específico de dominio (DSL) para la programación (como es el caso de Ethereum con Solidity), que pueden ser bien expresivos para ellos pero estás limitados cuando no hay una ejecución determinista.
+Un problema importante para este tipo de arquitectura \textit{order-execute} son las transacciones no deterministas. Las operaciones que se ejecutan después del consenso deben ser deterministas, ya que sino el \textit{ledger} distribuido se “bifurcaría” y se violaría la premisa básica de una \textit{blockchain}, que es garantizar que todos los nodos \textit{peers} presenten el mismo estado en sus respectivos \textit{ledger}. Esto se puede lograr usando un lenguaje específico de dominio (DSL) para la programación (como es el caso de Ethereum con Solidity), que pueden ser bien expresivos para ellos, pero estás limitados cuando no hay una ejecución determinista.
 
 Poder desarrollar contratos inteligentes en lenguajes de propósito general (como Go, Java, C/C++ y C$\sharp$ en el caso que nos ocupa en este trabajo)puede facilitar y acelerar la adopción de soluciones \textit{blockchain} entre los desarrolladores con experiencia en estos lenguajes.
 
